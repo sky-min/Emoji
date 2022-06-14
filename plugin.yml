@@ -1,0 +1,9 @@
+name: emoji
+main: skymin\emoji\Loader
+api: 4.5.0
+version: 1.0.0
+author: skymin
+
+permissios:
+  emoji.cmd:
+    default: true
