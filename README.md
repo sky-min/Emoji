@@ -1,5 +1,5 @@
 # Emoji
-<img src="./asset/icon.jpg">
+<img src="./EmojiPlugin/icon.png">
 pmmp emoji plugin
 
 ## how to use
