@@ -3,8 +3,10 @@ declare(strict_types = 1);
 
 namespace skymin\emoji;
 
-use pocketmine\plugin\PluginBase;
+use skymin\emoji\command\EmojiCmd;
 use skymin\emoji\exception\EmojiResourcePackException;
+
+use pocketmine\plugin\PluginBase;
 
 final class Loader extends PluginBase{
 
@@ -12,7 +14,8 @@ final class Loader extends PluginBase{
 	private const version = '1.0.0';
 
 	protected function onEnable() : void{
-		$resourcepackManager = $this->getServer()->getResourcePackManager();
+		$server = $this->getServer();
+		$resourcepackManager = $server->getResourcePackManager();
 		if (!$resourcepackManager->resourcePacksRequired()) {
 			throw new EmojiResourcePackException("'force_resources' must be set to 'true'");
 		}
@@ -23,6 +26,7 @@ final class Loader extends PluginBase{
 		if ($pack->getPackVersion() !== self::version) {
 			throw new EmojiResourcePackException("'Emoji Particle Resource Pack' version did not match");
 		}
+		$server->getCommandMap()->register('emoji', new EmojiCmd($this));
 	}
 
 }

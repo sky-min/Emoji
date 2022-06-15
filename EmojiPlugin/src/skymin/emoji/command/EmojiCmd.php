@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace skymin\emoji\command;
 
 use skymin\emoji\Loader;
+use skymin\emoji\form\EmojiSelectForm;
 
 use pocketmine\player\Player;
 use pocketmine\command\Command;
@@ -22,7 +23,7 @@ final class EmojiCmd extends Command implements PluginOwned{
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
 		if($sender instanceof Player && $this->testPermission($sender)){
-			
+			$sender->sendForm(new EmojiSelectForm());
 			return true;
 		}
 		return false;

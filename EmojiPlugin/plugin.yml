@@ -4,6 +4,6 @@ api: 4.5.0
 version: 1.0.0
 author: skymin
 
-permissios:
+permissions:
   emoji.cmd:
     default: true

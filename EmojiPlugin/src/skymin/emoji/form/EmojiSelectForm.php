@@ -19,8 +19,13 @@ final class EmojiSelectForm implements Form{
 			'type' => 'form',
 			'title' => 'EMOJI',
 			'content' => 'Choose the emoji you want',
-			'button' => $buttons
+			'buttons' => $buttons
 		];
+	}
+
+	public function handleResponse(Player $player, $data) : void{
+		if($data === null) return;
+		Emoji::sendEmoji($player, Emoji::EMOJI_LIST[$data]);
 	}
 
 }
