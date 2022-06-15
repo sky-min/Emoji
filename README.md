@@ -3,7 +3,7 @@
 pmmp emoji plugin
 
 ## how to use
-1. Download [Eresource_pac.mcpack](https://github.com/sky-min/Emoji/raw/master/resourcepack/EmojiParticle.mcpack) and put it in the resource_packs folder.
+1. Download [EmojiParticle.mcpack](https://github.com/sky-min/Emoji/raw/master/resourcepack/EmojiParticle.mcpack) and put it in the resource_packs folder.
 2. Open file `resource_packs.yml`, set **force_resources** to `true` and resource_stack to `EmojiParticle.mcpack`.
 ```yaml
 force_resources: true
