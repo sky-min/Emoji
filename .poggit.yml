@@ -1,8 +1,8 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/sky-min/Emoji
-build-by-default: true
 branches:
 - master
 projects:
   Emoji:
+    icon: "/asset/icon.jpg"
     path: EmojiPlugin/
 ...
