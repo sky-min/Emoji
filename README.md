@@ -1,0 +1,2 @@
+# Emoji
+pmmp emoji plugin
