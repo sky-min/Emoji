@@ -13,7 +13,7 @@ resource_stack:
 3. Apply this plugin
 4. Enjoy it with /emoji command
 
-# API
+## API
 ```php
 /**
  * @var $entity Entity
