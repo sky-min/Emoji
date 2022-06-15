@@ -3,6 +3,6 @@ branches:
 - master
 projects:
   Emoji:
-    icon: "./asset/icon.jpg"
+    icon: "../asset/icon.jpg"
     path: EmojiPlugin/
 ...
