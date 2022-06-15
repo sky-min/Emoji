@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace skymin\emoji;
 
 use pocketmine\Server;
+use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\network\mcpe\protocol\types\DimensionIds;
@@ -61,14 +62,16 @@ final class Emoji{
 		'frowning2' => [0.07, 0.04]
 	];
 
-	public static function sendEmoji(Player $player, string $emojiId) : void{
+	public static function sendEmoji(Entity $entity, string $emojiId) : void{
 		[$x, $y] = self::EMOJI_POS[$emojiId];
-		$viwers = $player->getViewers();
-		$viwers[] = $player;
+		$viwers = $entity->getViewers();
+		if($entity instanceof Player){
+			$viwers[] = $entity;
+		}
 		Server::getInstance()->broadcastPackets($viwers, [SpawnParticleEffectPacket::create(
 			DimensionIds::OVERWORLD,
 			-1,
-			$player->getPosition()->add(0, $player->getSize()->getHeight() + 1, 0),
+			$entity->getPosition()->add(0, $entity->getSize()->getHeight() + 1, 0),
 			'emoji:emoji',
 			'[{"name":"variable.ix","value":{"type":"float","value":'. $x . '}},{"name":"variable.iy","value":{"type":"float","value":' . $y . '}}]'
 		)]);
