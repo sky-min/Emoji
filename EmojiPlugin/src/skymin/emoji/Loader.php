@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace skymin\emoji;
 
+use pocketmine\plugin\PluginBase;
 use pocketmine\resourcepacks\ZippedResourcePack;
 use pocketmine\utils\AssumptionFailedError;
+
 use skymin\data\Data;
 use skymin\emoji\command\EmojiCmd;
 use skymin\emoji\exception\EmojiResourcePackException;
-
-use pocketmine\plugin\PluginBase;
 
 final class Loader extends PluginBase{
 	private static Loader $instance;

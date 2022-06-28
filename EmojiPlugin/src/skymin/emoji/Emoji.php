@@ -5,9 +5,9 @@ namespace skymin\emoji;
 
 use pocketmine\Server;
 use pocketmine\entity\Entity;
-use pocketmine\player\Player;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\network\mcpe\protocol\types\DimensionIds;
+use pocketmine\player\Player;
 
 use skymin\emoji\exception\EmojiInvalidInputException;
 
