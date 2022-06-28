@@ -64,11 +64,11 @@ final class Emoji{
 
 	public static function sendEmoji(Entity $entity, string $emojiId) : void{
 		[$x, $y] = self::EMOJI_POS[$emojiId];
-		$viwers = $entity->getViewers();
+		$viewers = $entity->getViewers();
 		if($entity instanceof Player){
-			$viwers[] = $entity;
+			$viewers[] = $entity;
 		}
-		Server::getInstance()->broadcastPackets($viwers, [SpawnParticleEffectPacket::create(
+		Server::getInstance()->broadcastPackets($viewers, [SpawnParticleEffectPacket::create(
 			DimensionIds::OVERWORLD,
 			-1,
 			$entity->getPosition()->add(0, $entity->getSize()->getHeight() + 1, 0),
