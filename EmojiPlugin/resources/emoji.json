@@ -1,0 +1,162 @@
+{
+  "smiley": {
+    "name": "Smiley",
+    "pos": [0.0, 0.0]
+  },
+  "grimacing": {
+    "name": "Grimacing",
+    "pos": [0.01, 0]
+  },
+  "grin": {
+    "name": "Grin",
+    "pos": [0.02, 0]
+  },
+  "joy": {
+    "name": "Joy",
+    "pos": [0.03, 0]
+  },
+  "smile": {
+    "name": "Smile",
+    "pos": [0.04, 0]
+  },
+  "sweat_smile": {
+    "name": "Sweat smile",
+    "pos": [0.05, 0]
+  },
+  "laughing": {
+    "name": "Laughing",
+    "pos": [0.06, 0]
+  },
+  "innocent": {
+    "name": "Innocent",
+    "pos": [0.07, 0]
+  },
+  "wink": {
+    "name": "Wink",
+    "pos": [0, 0.01]
+  },
+  "blush": {
+    "name": "Blush",
+    "pos": [0.01, 0.01]
+  },
+  "slight_smile": {
+    "name": "Slight smile",
+    "pos": [0.02, 0.01]
+  },
+  "upside_down": {
+    "name": "Upside down",
+    "pos": [0.03, 0.01]
+  },
+  "relaxed": {
+    "name": "Relaxed",
+    "pos": [0.04, 0.01]
+  },
+  "yum": {
+    "name": "Yum",
+    "pos": [0.05, 0.01]
+  },
+  "relieved": {
+    "name": "Relieved",
+    "pos": [0.06, 0.01]
+  },
+  "heart_eyes": {
+    "name": "Heart eyes",
+    "pos": [0.07, 0.01]
+  },
+  "kissing_heart": {
+    "name": "Kissing_heart",
+    "pos": [0.0, 0.02]
+  },
+  "kissing": {
+    "name": "Kissing",
+    "pos": [0.01, 0.02]
+  },
+  "kissing_smiling_eyes": {
+    "name": "Kissing smiling eyes",
+    "pos": [0.02, 0.02]
+  },
+  "kissing_closed_eyes": {
+    "name": "Kissing closed eyes",
+    "pos": [0.03, 0.02]
+  },
+  "stuck_out_tongue_winking_eye": {
+    "name": "Stuck out tongue winking eye",
+    "pos": [0.04, 0.02]
+  },
+  "stuck_out_tongue_closed_eyes": {
+    "name": "Stuck out tongue closed eyes",
+    "pos": [0.05, 0.02]
+  },
+  "stuck_out_tongue": {
+    "name": "Stuck out tongue",
+    "pos": [0.06, 0.02]
+  },
+  "money_mouth": {
+    "name": "Money mouth",
+    "pos": [0.07, 0.02]
+  },
+  "sunglasses": {
+    "name": "Sunglasses",
+    "pos": [0, 0.03]
+  },
+  "smirk": {
+    "name": "Smirk",
+    "pos": [0.01, 0.03]
+  },
+  "no_mouth": {
+    "name": "No mouth",
+    "pos": [0.02, 0.03]
+  },
+  "neutral_face": {
+    "name": "Neutral face",
+    "pos": [0.03, 0.03]
+  },
+  "expressionless": {
+    "name": "Expressionless",
+    "pos": [0.04, 0.03]
+  },
+  "unamused": {
+    "name": "Unamused",
+    "pos": [0.05, 0.03]
+  },
+  "rolling_eyes": {
+    "name": "Rolling eyes",
+    "pos": [0.06, 0.03]
+  },
+  "flushed": {
+    "name": "Flushed",
+    "pos": [0.07, 0.03]
+  },
+  "disappointed": {
+    "name": "Disappointed",
+    "pos": [0, 0.04]
+  },
+  "worried": {
+    "name": "Worried",
+    "pos": [0.01, 0.04]
+  },
+  "angry": {
+    "name": "Angry",
+    "pos": [0.02, 0.04]
+  },
+  "rage": {
+    "name": "Rage",
+    "pos": [0.03, 0.04]
+  },
+  "pensive": {
+    "name": "Pensive",
+    "pos": [0.04, 0.04]
+  },
+  "confused": {
+    "name": "Confused",
+    "pos": [0.05, 0.04]
+  },
+  "slight_frown": {
+    "name": "Slight frown",
+    "pos": [0.06, 0.04]
+  },
+  "frowning2": {
+    "name": "Frowning 2",
+    "pos": [0.07, 0.04]
+  }
+}

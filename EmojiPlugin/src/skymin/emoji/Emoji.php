@@ -9,61 +9,32 @@ use pocketmine\player\Player;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\network\mcpe\protocol\types\DimensionIds;
 
+use skymin\emoji\exception\EmojiInvalidInputException;
+
 final class Emoji{
+	private array $emojiList;
 
-	public const EMOJI_LIST = [
-		'smiley', 'grimacing', 'grin', 'joy', 'smile', 'sweat_smile', 'laughing', 'innocent',
-		'wink', 'blush', 'slight_smile', 'upside_down', 'relaxed', 'yum', 'relieved', 'heart_eyes',
-		'kissing_heart', 'kissing', 'kissing_smiling_eyes', 'kissing_closed_eyes', 'stuck_out_tongue_winking_eye', 'stuck_out_tongue_closed_eyes', 'stuck_out_tongue', 'money_mouth',
-		'sunglasses', 'smirk', 'no_mouth', 'neutral_face', 'expressionless', 'unamused', 'rolling_eyes', 'flushed',
-		'disappointed', 'worried', 'angry', 'rage', 'pensive', 'confused', 'slight_frown', 'frowning2'
-	];
+	public function __construct(
+		array $emojiList
+	){
+		foreach ($emojiList as $k => $v) {
+			if (!isset($v["name"], $v["pos"])) {
+				throw new EmojiInvalidInputException("$k must have valid inputs...");
+			}
+		}
+		$this->emojiList = $emojiList;
+	}
 
-	public const EMOJI_POS = [
-		'smiley' => [0, 0],
-		'grimacing' => [0.01, 0],
-		'grin' => [0.02, 0],
-		'joy' => [0.03, 0],
-		'smile' => [0.04, 0],
-		'sweat_smile' => [0.05, 0],
-		'laughing' => [0.06, 0],
-		'innocent' => [0.07, 0],
-		'wink' => [0, 0.01],
-		'blush' => [0.01, 0.01],
-		'slight_smile' => [0.02, 0.01],
-		'upside_down' => [0.03, 0.01],
-		'relaxed' => [0.04, 0.01],
-		'yum' => [0.05, 0.01],
-		'relieved' => [0.06, 0.01],
-		'heart_eyes' => [0.07, 0.01],
-		'kissing_heart' => [0, 0.02],
-		'kissing' => [0.01, 0.02],
-		'kissing_smiling_eyes' => [0.02, 0.02],
-		'kissing_closed_eyes' => [0.03, 0.02],
-		'stuck_out_tongue_winking_eye' => [0.04, 0.02],
-		'stuck_out_tongue_closed_eyes' => [0.05, 0.02],
-		'stuck_out_tongue' => [0.06, 0.02],
-		'money_mouth' => [0.07, 0.02],
-		'sunglasses' => [0, 0.03],
-		'smirk' => [0.01, 0.03],
-		'no_mouth' => [0.02, 0.03],
-		'neutral_face' => [0.03, 0.03],
-		'expressionless' => [0.04, 0.03],
-		'unamused' => [0.05, 0.03],
-		'rolling_eyes' => [0.06, 0.03],
-		'flushed' => [0.07, 0.03],
-		'disappointed' => [0, 0.04],
-		'worried' => [0.01, 0.04],
-		'angry' => [0.02, 0.04],
-		'rage' => [0.03, 0.04],
-		'pensive' => [0.04, 0.04],
-		'confused' => [0.05, 0.04],
-		'slight_frown' => [0.06, 0.04],
-		'frowning2' => [0.07, 0.04]
-	];
+	public function getEmojiList() : array{
+		return $this->emojiList;
+	}
 
-	public static function sendEmoji(Entity $entity, string $emojiId) : void{
-		[$x, $y] = self::EMOJI_POS[$emojiId];
+	public function sendEmoji(Entity $entity, string $emojiId) : void{
+		if (!isset($this->emojiList[$emojiId])) {
+			return;
+		}
+		[$x, $y] = $this->emojiList[$emojiId]["pos"];
+		$particle_name = $this->emojiList["particle_name"] ?? "emoji:emoji";
 		$viewers = $entity->getViewers();
 		if($entity instanceof Player){
 			$viewers[] = $entity;
@@ -72,9 +43,8 @@ final class Emoji{
 			DimensionIds::OVERWORLD,
 			-1,
 			$entity->getPosition()->add(0, $entity->getSize()->getHeight() + 1, 0),
-			'emoji:emoji',
+			$particle_name,
 			'[{"name":"variable.ix","value":{"type":"float","value":'. $x . '}},{"name":"variable.iy","value":{"type":"float","value":' . $y . '}}]'
 		)]);
 	}
-
 }
