@@ -12,7 +12,7 @@ use pocketmine\player\Player;
 final class Emoji{
 	private array $emojiList;
 
-	public const EMOJI_POS = [
+	private const EMOJI_POS = [
 		'smiley' => [0, 0],
 		'grimacing' => [0.01, 0],
 		'grin' => [0.02, 0],
