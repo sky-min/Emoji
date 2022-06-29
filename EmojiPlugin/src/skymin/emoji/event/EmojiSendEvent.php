@@ -12,7 +12,7 @@ use pocketmine\player\Player;
 final class EmojiSendEvent extends Event implements Cancellable{
 	use CancellableTrait;
 
-	/** @param Player[] $viewer */
+	/** @param Player[] $viewers */
 	public function __construct(
 		private Entity $sender,
 		private array $viewers,
@@ -23,7 +23,7 @@ final class EmojiSendEvent extends Event implements Cancellable{
 		return $this->sender;
 	}
 
-	public function getViewers() : string{
+	public function getViewers() : array{
 		return $this->viewers;
 	}
 
