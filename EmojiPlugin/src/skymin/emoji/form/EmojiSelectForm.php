@@ -12,7 +12,7 @@ final class EmojiSelectForm implements Form{
 
 	public function jsonSerialize() : array{
 		$buttons = [];
-		$emojiList = array_column(Loader::getInstance()->getEmoji()->getEmojiList(), "name");
+		$emojiList = Loader::getInstance()->getEmoji()->getEmojiList();
 		foreach($emojiList as $name){
 			$buttons[] = ['text' => $name];
 		}
