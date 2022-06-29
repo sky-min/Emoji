@@ -8,9 +8,14 @@ use pocketmine\entity\Entity;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\network\mcpe\protocol\types\DimensionIds;
 use pocketmine\player\Player;
+use pocketmine\utils\SingletonTrait;
+
+use skymin\emoji\event\EmojiSendEvent;
+
+use function count;
 
 final class Emoji{
-	private array $emojiList;
+	use SingletonTrait;
 
 	private const EMOJI_POS = [
 		'smiley' => [0, 0],
@@ -55,12 +60,19 @@ final class Emoji{
 		'frowning2' => [0.07, 0.04]
 	];
 
+	private array $emojiList;
+
+	private Server $server;
+
 	public function __construct(
 		array $emojiList
 	){
 		foreach (array_keys(self::EMOJI_POS) as $id) {
-			$this->emojiList[$id] = $emojiList[$id] ?? $id; // Get the name of the emoji, otherwise get the key as the name
+			$name = $emojiList[$id] ?? $id;
+			$this->emojiList[$id] = $name;
 		}
+		$this->server = Server::getInstance();
+		self::setInstance($this);
 	}
 
 	public function getEmojiList() : array{
@@ -68,19 +80,28 @@ final class Emoji{
 	}
 
 	public function sendEmoji(Entity $entity, string $emojiId) : void{
-		if (!isset(self::EMOJI_POS[$emojiId])) {
-			return;
-		}
-		[$x, $y] = self::EMOJI_POS[$emojiId];
 		$viewers = $entity->getViewers();
 		if($entity instanceof Player){
 			$viewers[] = $entity;
 		}
-		Server::getInstance()->broadcastPackets($viewers, [SpawnParticleEffectPacket::create(
+		if(count($viewers) < 1){
+			return;
+		}
+		$ev = new EmojiSendEvent($entity, $viewers, $emojiId);
+		$ev->call();
+		if($ev->isCancelled()){
+			return;
+		}
+		$emojiId = $ev->getEmojiId();
+		if(!isset(self::EMOJI_POS[$emojiId])){
+			return;
+		}
+		[$x, $y] = self::EMOJI_POS[$emojiId];
+		$this->server->broadcastPackets($viewers, [SpawnParticleEffectPacket::create(
 			DimensionIds::OVERWORLD,
 			-1,
 			$entity->getPosition()->add(0, $entity->getSize()->getHeight() + 1, 0),
-			"emoji:emoji",
+			'emoji:emoji',
 			'[{"name":"variable.ix","value":{"type":"float","value":'. $x . '}},{"name":"variable.iy","value":{"type":"float","value":' . $y . '}}]'
 		)]);
 	}
