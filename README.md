@@ -18,7 +18,6 @@ This plugin needs a resource pack and applies it automatically. At this point, t
 ```php
 /**
  * @var $entity Entity
- * @see $emojiId Emoji::EMOJI_LIST
  */
 Emoji::sendEmoji($entity, $emojiId);
 ```
