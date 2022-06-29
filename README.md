@@ -2,16 +2,17 @@
 <img src="./EmojiPlugin/icon.png">
 pmmp emoji plugin
 
-## how to use
-1. Download [EmojiParticle.mcpack](https://github.com/sky-min/Emoji/raw/master/resourcepack/EmojiParticle.mcpack) and put it in the resource_packs folder.
-2. Open file `resource_packs.yml`, set **force_resources** to `true` and resource_stack to `EmojiParticle.mcpack`.
-```yaml
-force_resources: true
-resource_stack:
-  - EmojiParticle.mcpack
-```
-3. Apply this plugin
-4. Enjoy it with /emoji command
+## General
+Express your feelings with emojis.
+
+## Note
+This plugin needs a resource pack and applies it automatically. At this point, the force_resources value changes to true.
+
+## How to use 
+1. Apply this plugin
+2. Edit the config.yml file of plugin in plugin_data/emoji
+3, you can customize name for emoji
+4. Select an emoji via the /emoji command
 
 ## API
 ```php
