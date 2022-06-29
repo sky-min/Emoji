@@ -3,16 +3,17 @@ declare(strict_types = 1);
 
 namespace skymin\emoji\form;
 
-use skymin\emoji\Emoji;
-
 use pocketmine\form\Form;
 use pocketmine\player\Player;
+
+use skymin\emoji\Loader;
 
 final class EmojiSelectForm implements Form{
 
 	public function jsonSerialize() : array{
 		$buttons = [];
-		foreach(Emoji::EMOJI_LIST as $name){
+		$emojiList = Loader::getInstance()->getEmoji()->getEmojiList();
+		foreach($emojiList as $name){
 			$buttons[] = ['text' => $name];
 		}
 		return [
@@ -24,8 +25,11 @@ final class EmojiSelectForm implements Form{
 	}
 
 	public function handleResponse(Player $player, $data) : void{
-		if($data === null) return;
-		Emoji::sendEmoji($player, Emoji::EMOJI_LIST[$data]);
+		if($data === null) {
+			return;
+		}
+		$emoji = Loader::getInstance()->getEmoji();
+		$emoji->sendEmoji($player, array_keys($emoji->getEmojiList())[$data]);
 	}
 
 }
