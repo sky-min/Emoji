@@ -6,9 +6,9 @@ namespace skymin\emoji\command;
 use skymin\emoji\Loader;
 use skymin\emoji\form\EmojiSelectForm;
 
-use pocketmine\player\Player;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
 

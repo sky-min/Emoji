@@ -5,21 +5,19 @@ namespace skymin\emoji;
 
 use pocketmine\Server;
 use pocketmine\entity\Entity;
-use pocketmine\player\Player;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\network\mcpe\protocol\types\DimensionIds;
+use pocketmine\player\Player;
+use pocketmine\utils\SingletonTrait;
+
+use skymin\emoji\event\EmojiSendEvent;
+
+use function count;
 
 final class Emoji{
+	use SingletonTrait;
 
-	public const EMOJI_LIST = [
-		'smiley', 'grimacing', 'grin', 'joy', 'smile', 'sweat_smile', 'laughing', 'innocent',
-		'wink', 'blush', 'slight_smile', 'upside_down', 'relaxed', 'yum', 'relieved', 'heart_eyes',
-		'kissing_heart', 'kissing', 'kissing_smiling_eyes', 'kissing_closed_eyes', 'stuck_out_tongue_winking_eye', 'stuck_out_tongue_closed_eyes', 'stuck_out_tongue', 'money_mouth',
-		'sunglasses', 'smirk', 'no_mouth', 'neutral_face', 'expressionless', 'unamused', 'rolling_eyes', 'flushed',
-		'disappointed', 'worried', 'angry', 'rage', 'pensive', 'confused', 'slight_frown', 'frowning2'
-	];
-
-	public const EMOJI_POS = [
+	private const EMOJI_POS = [
 		'smiley' => [0, 0],
 		'grimacing' => [0.01, 0],
 		'grin' => [0.02, 0],
@@ -62,13 +60,44 @@ final class Emoji{
 		'frowning2' => [0.07, 0.04]
 	];
 
-	public static function sendEmoji(Entity $entity, string $emojiId) : void{
-		[$x, $y] = self::EMOJI_POS[$emojiId];
-		$viwers = $entity->getViewers();
-		if($entity instanceof Player){
-			$viwers[] = $entity;
+	private array $emojiList;
+
+	private Server $server;
+
+	public function __construct(
+		array $emojiList
+	){
+		foreach (array_keys(self::EMOJI_POS) as $id) {
+			$name = $emojiList[$id] ?? $id;
+			$this->emojiList[$id] = $name;
 		}
-		Server::getInstance()->broadcastPackets($viwers, [SpawnParticleEffectPacket::create(
+		$this->server = Server::getInstance();
+		self::setInstance($this);
+	}
+
+	public function getEmojiList() : array{
+		return $this->emojiList;
+	}
+
+	public function sendEmoji(Entity $entity, string $emojiId) : void{
+		$viewers = $entity->getViewers();
+		if($entity instanceof Player){
+			$viewers[] = $entity;
+		}
+		if(count($viewers) < 1){
+			return;
+		}
+		$ev = new EmojiSendEvent($entity, $viewers, $emojiId);
+		$ev->call();
+		if($ev->isCancelled()){
+			return;
+		}
+		$emojiId = $ev->getEmojiId();
+		if(!isset(self::EMOJI_POS[$emojiId])){
+			return;
+		}
+		[$x, $y] = self::EMOJI_POS[$emojiId];
+		$this->server->broadcastPackets($viewers, [SpawnParticleEffectPacket::create(
 			DimensionIds::OVERWORLD,
 			-1,
 			$entity->getPosition()->add(0, $entity->getSize()->getHeight() + 1, 0),
@@ -76,5 +105,4 @@ final class Emoji{
 			'[{"name":"variable.ix","value":{"type":"float","value":'. $x . '}},{"name":"variable.iy","value":{"type":"float","value":' . $y . '}}]'
 		)]);
 	}
-
 }

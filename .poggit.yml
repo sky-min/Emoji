@@ -4,4 +4,7 @@ branches:
 projects:
   Emoji:
     path: EmojiPlugin/
+    libs:
+      - src: sky-min/DataConfig/Data
+        version: ^2.2.1
 ...
