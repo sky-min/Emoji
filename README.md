@@ -19,5 +19,5 @@ This plugin needs a resource pack and applies it automatically. At this point, t
 /**
  * @var $entity Entity
  */
-Emoji::sendEmoji($entity, $emojiId);
+Emoji::getInstance()->sendEmoji($entity, $emojiId);
 ```
